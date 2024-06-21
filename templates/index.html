@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Clock</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>The current date and time is: <span id="time"></span></p>
+
+    <script>
+        function updateTime() {
+            fetch('/time')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('time').innerText = data.time;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        setInterval(updateTime, 1000); // Update every second
+        updateTime(); // Initial call to set the time immediately
+    </script>
+</body>
+</html>
